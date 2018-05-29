@@ -6,15 +6,30 @@
 
 	using namespace std;
 
-	int tempo_espera = 10;
+	class Minha_Thread
+	{
+
+	private:
+
+		int tempo_espera = 1;
+
+	public:
+
+		Minha_Thread(){};
+		~Minha_Thread(){};
+
+		void func(int &x);
+		void normal();
+		void com_thread();		
+	};
 
 	
-	void func(int &x){
+	void Minha_Thread::func(int &x){
 		x += 10;
 		this_thread::sleep_for (std::chrono::seconds(tempo_espera));
 	}
 
-	void normal(){
+	void Minha_Thread::normal(){
 
 		int x = 0;
 
@@ -31,18 +46,23 @@
 
 		cout << "Saida: " << x << endl;
 		cout << "Tempo: " << tempo << " segundos" << endl;
+
+
 	}
 
-	void com_thread(){
+	void Minha_Thread::com_thread(){
 
 		int x = 0;
 
-		thread t1(func,ref(x));
-		thread t2(func,ref(x));
-		thread t3(fuc,ref(x));
-		thread t4(func,ref(x));
+		Minha_Thread *mt = new Minha_Thread();
 
-		auto inicio = Clock::now();	
+		thread t1(&Minha_Thread::func, mt, ref(x));
+		thread t2(&Minha_Thread::func, mt, ref(x));
+		thread t3(&Minha_Thread::func, mt, ref(x));
+		thread t4(&Minha_Thread::func, mt, ref(x));
+		
+
+		auto inicio = Clock::now();
 
 		t1.join();
 		t2.join();
@@ -56,15 +76,15 @@
 		cout << "Saida: " << x << endl;
 		cout << "Tempo: " << tempo << " segundos" << endl;
 
+
 	}
 
 	int main(){
 
-		cout << "\nExecutando programa sem utilização de threads..." << endl;
-		normal();
+		Minha_Thread t;
 
-		cout << "\nExecutando programa com utilização de threads..." << endl;
-		com_thread();
+		t.normal();
+		t.com_thread();
 
 		return 0;
 	}
