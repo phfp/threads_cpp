@@ -39,7 +39,7 @@
 
 		thread t1(func,ref(x));
 		thread t2(func,ref(x));
-		thread t3(fuc,ref(x));
+		thread t3(func,ref(x));
 		thread t4(func,ref(x));
 
 		auto inicio = Clock::now();	
