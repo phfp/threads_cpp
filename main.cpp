@@ -9,22 +9,7 @@
 	int tempo_espera = 10;
 
 	
-	void a(int &x){
-		x += 10;
-		this_thread::sleep_for (std::chrono::seconds(tempo_espera));
-	}
-
-	void b(int &x){
-		x += 10;
-		this_thread::sleep_for (std::chrono::seconds(tempo_espera));
-	}
-
-	void c(int &x){
-		x += 10;
-		this_thread::sleep_for (std::chrono::seconds(tempo_espera));
-	}
-
-	void d(int &x){
+	void func(int &x){
 		x += 10;
 		this_thread::sleep_for (std::chrono::seconds(tempo_espera));
 	}
@@ -35,10 +20,10 @@
 
 		auto inicio = Clock::now();		
 
-		a(x);
-		b(x);
-		c(x);
-		d(x);
+		func(x);
+		func(x);
+		func(x);
+		func(x);
 
 		auto fim = Clock::now();
 
@@ -52,10 +37,10 @@
 
 		int x = 0;
 
-		thread t1(a,ref(x));
-		thread t2(b,ref(x));
-		thread t3(c,ref(x));
-		thread t4(d,ref(x));
+		thread t1(func,ref(x));
+		thread t2(func,ref(x));
+		thread t3(fuc,ref(x));
+		thread t4(func,ref(x));
 
 		auto inicio = Clock::now();	
 
@@ -77,7 +62,7 @@
 
 		cout << "\nExecutando programa sem utilização de threads..." << endl;
 		normal();
-		
+
 		cout << "\nExecutando programa com utilização de threads..." << endl;
 		com_thread();
 
