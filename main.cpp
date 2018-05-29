@@ -54,14 +54,7 @@
 
 		int x = 0;
 
-<<<<<<< HEAD
 		Minha_Thread *mt = new Minha_Thread();
-=======
-		thread t1(func,ref(x));
-		thread t2(func,ref(x));
-		thread t3(func,ref(x));
-		thread t4(func,ref(x));
->>>>>>> 01385b52a253520fd582fa000053802e40cd64ec
 
 		thread t1(&Minha_Thread::func, mt, ref(x));
 		thread t2(&Minha_Thread::func, mt, ref(x));
